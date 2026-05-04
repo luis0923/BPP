@@ -15,6 +15,7 @@ public class Sistema
             System.out.println("Classificacao: " + newsRepository.newsRepository.get(i).getClassification());
             System.out.println("-------------------");
         }
+
     }
 
     //Responsável por avaliar a qualidade das informações das mensagens!!
@@ -22,17 +23,9 @@ public class Sistema
     {
         int score = 0;
 
-        if (!txt.contains("FONTE")) {
-            score = score + 1;
-        }
-        if (txt.contains("!!!")) {
-            score = score + 1;
-        }
-        if (txt.contains("URGENTE")) {
-            score = score + 1;
-        }
-        if (txt.length() < 10) {
-            score = score + 1;
+        if (!txt.contains("FONTE") || txt.contains("!!!") || txt.contains("URGENTE") || txt.length() < 10)
+        {
+            score += 1;
         }
 
         if (score == 0) {

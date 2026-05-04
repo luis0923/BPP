@@ -1,5 +1,7 @@
 package Verification;
 
+// Exclusão class D
+//Função F virou news
 public class News
 {
     private String text;
