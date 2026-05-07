@@ -1,4 +1,6 @@
 package Model;
+import Verification.NewsClassification;
+
 import java.util.Scanner;
 
 public class Sistema
@@ -18,25 +20,6 @@ public class Sistema
 
     }
 
-    //Responsável por avaliar a qualidade das informações das mensagens!!
-    public static String analiseDeMensagem(String txt)
-    {
-        int score = 0;
-
-        if (!txt.contains("FONTE") || txt.contains("!!!") || txt.contains("URGENTE") || txt.length() < 10)
-        {
-            score += 1;
-        }
-
-        if (score == 0) {
-            return "confiavel";
-        } else if (score == 1) {
-            return "duvidosa";
-        } else {
-            return "falsa";
-        }
-    }
-
     public static void manualTextAdditionAndClassification(Scanner scanner)
     {
 
@@ -50,11 +33,13 @@ public class Sistema
 
     }
 
-    public static void automaticTextAdditionAndClassification(Scanner scanner) {
+    public static void automaticTextAdditionAndClassification(Scanner scanner)
+    {
+        NewsClassification newsClassification = new NewsClassification();
         System.out.print("Digite o texto: ");
         String text = scanner.nextLine();
 
-        String classifier = analiseDeMensagem(text);
+        String classifier = newsClassification.messageAnalysis(text);
         newsRepository.newsStorage(text, classifier);
     }
 
