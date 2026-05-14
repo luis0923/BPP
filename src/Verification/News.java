@@ -2,27 +2,21 @@ package Verification;
 
 // Exclusão class D
 //Função F virou news
-public class News
-{
+public class News {
     private String text;
     private String classification;
 
-
     //Função construtora, que recebe e trata as noticias
-    public News(String text, String classification) //News é oriunda da refatoração da "Função faz tudo"
-    {
-        if(text == null || text.isBlank())
-        {
-            throw new IllegalArgumentException("O Texto é inválido");
-        }
-
-        this.text = text;
-        this.classification =(classification == null || classification.isBlank())
-                ? "Duvidosa"
-                : classification;
+    public News(String text, String classification) { //News é oriunda da refatoração da "Função faz tudo"
+        this.text = NewsValidator.validateAndNormalizeText(text);
+        this.classification = NewsValidator.validateAndNormalizeClassification(classification);
     }
-    public String getText(){return text;}
 
-    public String getClassification(){return classification;}
+    public String getText() {
+        return text;
+    }
 
+    public String getClassification() {
+        return classification;
+    }
 }

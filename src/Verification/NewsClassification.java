@@ -5,15 +5,16 @@ package Verification;
 //Tratamento para o caso da fonte estar em letras minusculas
 public class NewsClassification
 {
-    public static String messageAnalysis(String texto)
-    {
-        String normalizedText = texto.toUpperCase();
-        if (normalizedText.contains("FONTE") || normalizedText.contains("FONTE:"))
-        {
+   public static String messageAnalysis(String texto) {
+        String normalizedText = NewsValidator.validateAndNormalizeText(texto);
+
+        String upperText = normalizedText.toUpperCase();
+
+        if (upperText.contains("FONTE") || upperText.contains("FONTE:")) {
             return "confiavel";
         }
 
-        int score = scoreCalculator(texto);
+        int score = scoreCalculator(normalizedText);
 
         if (score == 0) return "confiavel";
         if (score == 1) return "duvidosa";

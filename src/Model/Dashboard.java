@@ -9,38 +9,56 @@ public class Dashboard
         SystemOfAdditionAndClassification systemOfAdditionAndClassification = new SystemOfAdditionAndClassification();
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        
         while (running)
         {
-            System.out.println("1 - adicionar manual");
-            System.out.println("2 - adicionar automatico");
-            System.out.println("3 - listar");
-            System.out.println("4 - sair");
+            System.out.println("\n===== MENU =====");
+            System.out.println("1 - Adicionar manual");
+            System.out.println("2 - Adicionar automático");
+            System.out.println("3 - Listar");
+            System.out.println("4 - Sair");
 
-            int op = scanner.nextInt();
-            scanner.nextLine();
+            int op = readMenuOption(scanner);
 
             switch(op)
             {
                 case 1:
-                    systemOfAdditionAndClassification.manualTextAdditionAndClassification(scanner);
+                    system.manualTextAdditionAndClassification(scanner);
                     break;
                 case 2:
-                    systemOfAdditionAndClassification.automaticTextAdditionAndClassification(scanner);
+                    system.automaticTextAdditionAndClassification(scanner);
                     break;
                 case 3:
-                    systemOfAdditionAndClassification.returnTextInformation();
+                    system.returnTextInformation();
                     break;
                 case 4:
                     running = false;
+                    System.out.println("Sistema encerrado.");
                     break;
                 default:
-                    System.out.println("Digite um valor válido!");
-
-
+                    System.out.println("Opção inválida.");
+                    break;
             }
 
         }
         scanner.close();
+    }
+    private static int readMenuOption(Scanner scanner) {
+        while (true) {
+            System.out.print("Escolha uma opção: ");
+            String input = scanner.nextLine();
 
+            try {
+                int option = Integer.parseInt(input.trim());
+
+                if (option >= 1 && option <= 4) {
+                    return option;
+                }
+
+                System.out.println("Opção inválida. Digite um número entre 1 e 4.");
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Digite apenas números.");
+            }
+        }
     }
 }
